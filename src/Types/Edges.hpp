@@ -25,7 +25,7 @@ public:
     std::vector< std::vector<cv::Point> > edges;
     std::vector<cv::Vec4i> hierarchy;
 
-	virtual void draw(cv::Mat& image, cv::Scalar color, int offsetX = 0, int offsetY = 0) 
+    virtual void draw(cv::Mat& image, cv::Scalar color, int offsetX = 0, int offsetY = 0)
 	{
         for (unsigned int i = 0; i < edges.size(); ++i)
 		{

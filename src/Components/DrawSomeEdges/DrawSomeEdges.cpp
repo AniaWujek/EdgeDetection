@@ -7,61 +7,66 @@
 #include <memory>
 #include <string>
 
-#include "DrawEdges.hpp"
+#include "DrawSomeEdges.hpp"
 #include "Common/Logger.hpp"
 
 #include <boost/bind.hpp>
 
 namespace Processors {
-namespace DrawEdges {
+namespace DrawSomeEdges {
 
-DrawEdges::DrawEdges(const std::string & name) :
-		Base::Component(name)  {
-
+DrawSomeEdges::DrawSomeEdges(const std::string & name) :
+        Base::Component(name),
+        edgeNumber("edgeNumber", 3)
+{
+    registerProperty(edgeNumber);
 }
 
-DrawEdges::~DrawEdges() {
+DrawSomeEdges::~DrawSomeEdges() {
 }
 
-void DrawEdges::prepareInterface() {
+void DrawSomeEdges::prepareInterface() {
 	// Register data streams, events and event handlers HERE!
 	registerStream("in_img", &in_img);
 	registerStream("in_edges", &in_edges);
 	registerStream("out_img", &out_img);
 	// Register handlers
-	h_DrawContours.setup(boost::bind(&DrawEdges::DrawContours, this));
+    h_DrawContours.setup(boost::bind(&DrawSomeEdges::DrawContours, this));
 	registerHandler("DrawContours", &h_DrawContours);
 	addDependency("DrawContours", &in_img);
 	addDependency("DrawContours", &in_edges);
 
 }
 
-bool DrawEdges::onInit() {
+bool DrawSomeEdges::onInit() {
 
 	return true;
 }
 
-bool DrawEdges::onFinish() {
+bool DrawSomeEdges::onFinish() {
 	return true;
 }
 
-bool DrawEdges::onStop() {
+bool DrawSomeEdges::onStop() {
 	return true;
 }
 
-bool DrawEdges::onStart() {
+bool DrawSomeEdges::onStart() {
 	return true;
 }
 
-void DrawEdges::DrawContours() {
+void DrawSomeEdges::DrawContours() {
     Types::Edges edges = Types::Edges(in_edges.read());
     cv::Mat image = in_img.read().clone();
     cv::Mat image_out = cv::Mat::zeros(image.size(), CV_8UC3);
-    edges.draw(image_out, cv::Scalar(255,255,255));
+    for (unsigned int i = 0; i < edgeNumber; ++i)
+    {
+        cv::drawContours(image_out, edges.edges, i, cv::Scalar(255,255,255), 1, 8, edges.hierarchy, 0, cv::Point() );
+    }
     out_img.write(image_out);
 }
 
 
 
-} //: namespace DrawEdges
+} //: namespace DrawSomeEdges
 } //: namespace Processors

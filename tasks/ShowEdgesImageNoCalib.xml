@@ -13,14 +13,7 @@
                     <param name="sequence.pattern">.*\.png</param>
                     <param name="mode.loop">1</param>
                 </Component>
-                <Component name="CameraInfo" type="CvCoreTypes:CameraInfoProvider" priority="2">
-					<param name="width">1296</param>
-					<param name="height">1032</param>
-					<param name="camera_matrix">1052.974150 0.000000 646.343139 ; 0.000000 1048.529819 506.165068 ; 0.000000 0.000000 1.000000</param>
-					<param name="dist_coeffs">-0.405033 0.189376 0.000262 0.000465 0.000000</param>
-				</Component>
-				<Component name="Undistort" type="CvBasic:CvUndistort" priority="3" bump="0">
-				</Component>    
+                
 				<Component name="Conv2gray" type="CvBasic:CvColorConv" priority="4">
             		<param name="type">CV_RGB2GRAY</param>
             	</Component>            
@@ -29,13 +22,13 @@
             <Executor name="Processor" period="0.5">
             	
             	<Component name="GaussianBlur" type="CvBasic:CvGaussianBlur" priority="1">
-            		<param name="kernel.width">0</param>
-					<param name="kernel.height">0</param>
-					<param name="sigma.x">2.5</param>
-					<param name="sigma.y">2.5</param>
+            		<param name="kernel.width">3</param>
+					<param name="kernel.height">3</param>
+					<param name="sigma.x">0.5</param>
+					<param name="sigma.y">0.5</param>
             	</Component>
             
-		        <Component name="FindEdges" type="EdgeDetection:FindEdges" priority="2">            
+		        <Component name="FindEdges" type="EdgeDetection:FindEdges" priority="2">          
 		        </Component>
 		        <Component name="DrawEdges" type="EdgeDetection:DrawEdges" priority="3">            
 		        </Component>
@@ -53,16 +46,11 @@
     
     <DataStreams>
         <Source name="Source.out_img">
-        	<sink>Undistort.in_img</sink>
         	<sink>Displayer.in_img0</sink>
-        </Source>
-        <Source name="CameraInfo.out_camera_info">
-        	<sink>Undistort.in_camera_info</sink>
-        </Source>
-        <Source name="Undistort.out_img">
         	<sink>Conv2gray.in_img</sink>
         	<sink>DrawEdges.in_img</sink>
         </Source>
+        
         <Source name="Conv2gray.out_img">
         	<sink>GaussianBlur.in_img</sink>
         </Source>
