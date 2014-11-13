@@ -1,0 +1,50 @@
+<Task>
+    <Reference>
+        <Description>
+            <brief>Find edges</brief>
+        </Description>
+    </Reference>
+    <Subtasks>
+        <Subtask name="main">    
+                
+            <Executor name="Loader" period="0.5">
+                <Component name="Source" type="CameraPGR:CameraPGR" priority="1" bump="0">
+                    <param name="camera_serial">13481977</param>
+                    <param name="fps">10</param>
+                </Component>
+                <Component name="CameraInfo" type="CvCoreTypes:CameraInfoProvider" priority="2">
+					<param name="width">1296</param>
+					<param name="height">1032</param>
+					<param name="camera_matrix">1052.974150 0.000000 646.343139 ; 0.000000 1048.529819 506.165068 ; 0.000000 0.000000 1.000000</param>
+					<param name="dist_coeffs">-0.405033 0.189376 0.000262 0.000465 0.000000</param>
+				</Component>
+				<Component name="Undistort" type="CvBasic:CvUndistort" priority="3" bump="0">
+				</Component>    
+				<Component name="Conv2gray" type="CvBasic:CvColorConv" priority="4">
+            		<param name="type">CV_RGB2GRAY</param>
+            	</Component>            
+            </Executor>
+            
+            <Executor>
+            <Component name="Edges">
+            
+            </Component>
+            </Executor>
+            
+            
+            
+            <Executor name="Displayer" period="0.5">
+                <Component name="Displayer" type="CvBasic:CvWindow" priority="1" bump="0">
+                    <param name="count">1</param>
+                    <param name="title">circles</param>                    
+                </Component>
+                
+            </Executor>
+        </Subtask>
+    </Subtasks>
+    
+    <DataStreams>
+        
+        
+    </DataStreams>
+</Task>
