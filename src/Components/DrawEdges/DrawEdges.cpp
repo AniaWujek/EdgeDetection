@@ -56,8 +56,9 @@ bool DrawEdges::onStart() {
 void DrawEdges::DrawContours() {
     Types::Edges edges = Types::Edges(in_edges.read());
     cv::Mat image = in_img.read().clone();
-    edges.draw(image, cv::Scalar(0,255,0));
-    out_img.write(image);
+    cv::Mat image_out = cv::Mat::zeros(image.size(), CV_8UC3);
+    edges.draw(image_out, cv::Scalar(0,255,0));
+    out_img.write(image_out);
 }
 
 
