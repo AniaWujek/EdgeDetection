@@ -4,3 +4,5 @@ ADD_COMPONENT(FindEdges)
 ADD_COMPONENT(DrawEdges)
 
 ADD_COMPONENT(DrawSomeEdges)
+
+ADD_COMPONENT(DrawLines)

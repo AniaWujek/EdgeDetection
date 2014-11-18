@@ -58,6 +58,7 @@ void DrawEdges::DrawContours() {
     cv::Mat image = in_img.read().clone();
     cv::Mat image_out = cv::Mat::zeros(image.size(), CV_8UC3);
     edges.draw(image_out, cv::Scalar(255,255,255));
+    cv::cvtColor(image_out, image_out, CV_BGR2GRAY);
     out_img.write(image_out);
 }
 
