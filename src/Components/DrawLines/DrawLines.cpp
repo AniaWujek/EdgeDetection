@@ -56,8 +56,13 @@ bool DrawLines::onStart() {
 void DrawLines::DrawHoughLines() {
     cv::Mat image = in_img.read().clone();
     Types::DrawableContainer lines = in_lines.read();
-    lines.draw(image, cv::Scalar(0,255,0));
-    out_img.write(image);
+
+
+
+    cv::Mat image_out = cv::Mat::zeros(image.size(), CV_8UC3);
+    lines.draw(image_out, cv::Scalar(255,255,255));
+    //cv::cvtColor(image_out, image_out, CV_BGR2GRAY);
+    out_img.write(image_out);
 }
 
 
