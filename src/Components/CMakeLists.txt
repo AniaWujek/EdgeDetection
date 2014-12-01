@@ -6,3 +6,5 @@ ADD_COMPONENT(DrawEdges)
 ADD_COMPONENT(DrawSomeEdges)
 
 ADD_COMPONENT(DrawLines)
+
+ADD_COMPONENT(DrawCorners)
