@@ -16,7 +16,7 @@ namespace Processors {
 namespace FindEdges {
 
 FindEdges::FindEdges(const std::string & name) :
-		Base::Component(name) , 
+		Base::Component(name) ,
         lowerThreshold("histeresis.lowerThreshold", 50, "range"),
         higherThreshold("histeresis.higherThreshold", 150, "range"),
         kernelSize("kernelSize", 3),
@@ -75,7 +75,6 @@ void FindEdges::FindContours() {
     out_image.create(image.size(), CV_8U);
     Canny(image, out_image, lowerThreshold, higherThreshold, kernelSize);
     findContours( out_image, e.edges, e.hierarchy, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE, cv::Point(0, 0) );
-    std::cout<<"\n\nedges: "<<e.edges.size()<<"\n\n";
     out_edges.write(e);
 
 

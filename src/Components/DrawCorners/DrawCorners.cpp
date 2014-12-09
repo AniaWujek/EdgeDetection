@@ -59,7 +59,7 @@ void DrawCorners::DrawDetectedCorners() {
     cv::Mat image = in_img.read().clone();
 
     for(int i = 0; i < corners.size(); ++i) {
-        circle(image, corners[i], 10, cv::Scalar(0, 255, 0), -1, 8, 0);
+        circle(image, corners[i], 5, cv::Scalar(0, 255, 0), -1, 8, 0);
     }
 
     out_img.write(image);
