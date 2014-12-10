@@ -10,3 +10,5 @@ ADD_COMPONENT(DrawLines)
 ADD_COMPONENT(DrawCorners)
 
 ADD_COMPONENT(DrawHarris)
+
+ADD_COMPONENT(DrawSystem)
