@@ -20,16 +20,30 @@ FindEdges::FindEdges(const std::string & name) :
         lowerThreshold("histeresis.lowerThreshold", 50, "range"),
         higherThreshold("histeresis.higherThreshold", 150, "range"),
         kernelSize("kernelSize", 3),
-        method("method", std::string("CV_RETR_CCOMP")) {
+        mode("mode", CV_RETR_EXTERNAL, "combo"),
+        method("method", CV_CHAIN_APPROX_NONE, "combo") {
 
     lowerThreshold.addConstraint("0");
     lowerThreshold.addConstraint("100");
     higherThreshold.addConstraint("0");
     higherThreshold.addConstraint("300");
 
+    mode.setToolTip("MODE");
+    mode.addConstraint("CV_RETR_EXTERNAL");
+    mode.addConstraint("CV_RETR_LIST");
+    mode.addConstraint("CV_RETR_CCOMP");
+    mode.addConstraint("CV_RETR_TREE");
+
+    method.setToolTip("METHOD");
+    method.addConstraint("CV_CHAIN_APPROX_NONE");
+    method.addConstraint("CV_CHAIN_APPROX_SIMPLE");
+    method.addConstraint("CV_CHAIN_APPROX_TC89_L1");
+    method.addConstraint("CV_CHAIN_APPROX_TC89_KCOS");
+
     registerProperty(lowerThreshold);
     registerProperty(higherThreshold);
     registerProperty(kernelSize);
+    registerProperty(mode);
 	registerProperty(method);
 
 }
@@ -74,7 +88,7 @@ void FindEdges::FindContours() {
 
     out_image.create(image.size(), CV_8U);
     Canny(image, out_image, lowerThreshold, higherThreshold, kernelSize);
-    findContours( out_image, e.edges, e.hierarchy, CV_RETR_EXTERNAL, CV_CHAIN_APPROX_SIMPLE, cv::Point(0, 0) );
+    findContours( out_image, e.edges, e.hierarchy, mode, method, cv::Point(0, 0) );
     out_edges.write(e);
 
 

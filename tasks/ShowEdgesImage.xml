@@ -5,8 +5,8 @@
         </Description>
     </Reference>
     <Subtasks>
-        <Subtask name="main">    
-                
+        <Subtask name="main">
+
             <Executor name="Loader" period="0.5">
                 <Component name="Source" type="CvBasic:Sequence" priority="1" bump="0">
                     <param name="sequence.directory">%[TASK_LOCATION]%/../data/</param>
@@ -20,37 +20,37 @@
 					<param name="dist_coeffs">-0.405033 0.189376 0.000262 0.000465 0.000000</param>
 				</Component>
 				<Component name="Undistort" type="CvBasic:CvUndistort" priority="3" bump="0">
-				</Component>    
+				</Component>
 				<Component name="Conv2gray" type="CvBasic:CvColorConv" priority="4">
             		<param name="type">CV_RGB2GRAY</param>
-            	</Component>            
+            	</Component>
             </Executor>
-            
+
             <Executor name="Processor" period="0.5">
-            	
+
             	<Component name="GaussianBlur" type="CvBasic:CvGaussianBlur" priority="1">
             		<param name="kernel.width">0</param>
 					<param name="kernel.height">0</param>
 					<param name="sigma.x">2.5</param>
 					<param name="sigma.y">2.5</param>
             	</Component>
-            
-		        <Component name="FindEdges" type="EdgeDetection:FindEdges" priority="2">            
+
+		        <Component name="FindEdges" type="EdgeDetection:FindEdges" priority="2">
 		        </Component>
-		        <Component name="DrawEdges" type="EdgeDetection:DrawEdges" priority="3">            
+		        <Component name="DrawEdges" type="EdgeDetection:DrawEdges" priority="3">
 		        </Component>
-            </Executor>           
-            
+            </Executor>
+
             <Executor name="Displayer" period="0.5">
                 <Component name="Displayer" type="CvBasic:CvWindow" priority="1" bump="0">
-                    <param name="count">2</param>
-                    <param name="title">original, edges</param>                    
+                    <param name="count">3</param>
+                    <param name="title">original, edges, gauss</param>
                 </Component>
-                
+
             </Executor>
         </Subtask>
     </Subtasks>
-    
+
     <DataStreams>
         <Source name="Source.out_img">
         	<sink>Undistort.in_img</sink>
@@ -67,6 +67,7 @@
         	<sink>GaussianBlur.in_img</sink>
         </Source>
         <Source name="GaussianBlur.out_img">
+            <sink>Displayer.in_img2</sink>
         	<sink>FindEdges.in_img</sink>
         </Source>
         <Source name="FindEdges.out_edges">
@@ -75,7 +76,7 @@
         <Source name="DrawEdges.out_img">
         	<sink>Displayer.in_img1</sink>
         </Source>
-        
-        
+
+
     </DataStreams>
 </Task>
