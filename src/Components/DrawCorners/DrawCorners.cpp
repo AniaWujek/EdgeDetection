@@ -57,8 +57,8 @@ void DrawCorners::DrawDetectedCorners() {
 
     std::vector<cv::Point2f> corners = in_corners.read();
     cv::Mat image = in_img.read().clone();
-    
-    std::cout<<"draw corners!\n";
+
+
 
     for(int i = 0; i < corners.size(); ++i) {
         circle(image, corners[i], 5, cv::Scalar(0, 255, 0), -1, 8, 0);
