@@ -11,6 +11,9 @@
 #include "Common/Logger.hpp"
 
 #include <boost/bind.hpp>
+#include <stdio.h>
+#include <stdlib.h>
+
 
 namespace Processors {
 namespace DrawCorners {
@@ -62,6 +65,11 @@ void DrawCorners::DrawDetectedCorners() {
 
     for(int i = 0; i < corners.size(); ++i) {
         circle(image, corners[i], 5, cv::Scalar(0, 255, 0), -1, 8, 0);
+
+        if(i == 0) putText(image, "0", corners[i], cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(0, 255, 0));
+        else if(i == 1) putText(image, "1", corners[i], cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(0, 255, 0));
+        else if(i == 2) putText(image, "2", corners[i], cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(0, 255, 0));
+        else if(i == 3) putText(image, "3", corners[i], cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(0, 255, 0));
     }
 
     out_img.write(image);

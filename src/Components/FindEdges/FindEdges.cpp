@@ -92,7 +92,6 @@ void FindEdges::FindContours() {
     findContours( out_image, e.edges, e.hierarchy, mode, method, cv::Point(0, 0) );
     out_edges.write(e);
 
-    std::cout<<"\nfind edges\n";
 
 
 

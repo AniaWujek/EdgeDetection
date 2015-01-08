@@ -66,7 +66,6 @@ void DrawSystem::drawSys() {
         circle(image, impoints[i], 3, cv::Scalar(0, 255, 0), -1, 8, 0);
     }
 
-    std::cout<<"\ndraw system\n";
 
    out_img.write(image);
 }
