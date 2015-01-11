@@ -12,3 +12,5 @@ ADD_COMPONENT(DrawCorners)
 ADD_COMPONENT(DrawHarris)
 
 ADD_COMPONENT(DrawSystem)
+
+ADD_COMPONENT(ReduceEdges)

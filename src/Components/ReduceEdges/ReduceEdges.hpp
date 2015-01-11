@@ -4,8 +4,8 @@
  * \author Anna Wujek
  */
 
-#ifndef DRAWSYSTEM_HPP_
-#define DRAWSYSTEM_HPP_
+#ifndef REDUCEEDGES_HPP_
+#define REDUCEEDGES_HPP_
 
 #include "Component_Aux.hpp"
 #include "Component.hpp"
@@ -14,30 +14,32 @@
 #include "EventHandler2.hpp"
 
 #include <opencv2/opencv.hpp>
+#include "Types/Edges.hpp"
+
 #include "Types/DrawableContainer.hpp"
 #include "Types/Line.hpp"
 
 
 namespace Processors {
-namespace DrawSystem {
+namespace ReduceEdges {
 
 /*!
- * \class DrawSystem
- * \brief DrawSystem processor class.
+ * \class ReduceEdges
+ * \brief ReduceEdges processor class.
  *
  *
  */
-class DrawSystem: public Base::Component {
+class ReduceEdges: public Base::Component {
 public:
 	/*!
 	 * Constructor.
 	 */
-	DrawSystem(const std::string & name = "DrawSystem");
+	ReduceEdges(const std::string & name = "ReduceEdges");
 
 	/*!
 	 * Destructor
 	 */
-	virtual ~DrawSystem();
+	virtual ~ReduceEdges();
 
 	/*!
 	 * Prepare components interface (register streams and handlers).
@@ -70,30 +72,29 @@ protected:
 
 
 	// Input data streams
-	Base::DataStreamIn<cv::Mat> in_img;
-	Base::DataStreamIn<Types::DrawableContainer> in_csystem;
-	Base::DataStreamIn<std::vector<cv::Point2f> > in_impoints;
+	Base::DataStreamIn<Types::Edges> in_edges;
 
 	// Output data streams
-	Base::DataStreamOut<cv::Mat> out_img;
+	Base::DataStreamOut <Types::DrawableContainer> out_linesDrawable;
+	Base::DataStreamOut < vector<cv::Vec4i> > out_lines;
 
 	// Handlers
-	Base::EventHandler2 h_drawSys;
+	Base::EventHandler2 h_reduce;
 
 	// Properties
-
+    Base::Property<float> diff;
 
 	// Handlers
-	void drawSys();
+	void reduce();
 
 };
 
-} //: namespace DrawSystem
+} //: namespace ReduceEdges
 } //: namespace Processors
 
 /*
  * Register processor component.
  */
-REGISTER_COMPONENT("DrawSystem", Processors::DrawSystem::DrawSystem)
+REGISTER_COMPONENT("ReduceEdges", Processors::ReduceEdges::ReduceEdges)
 
-#endif /* DRAWSYSTEM_HPP_ */
+#endif /* REDUCEEDGES_HPP_ */
