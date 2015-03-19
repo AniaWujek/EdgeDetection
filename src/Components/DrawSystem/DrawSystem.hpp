@@ -70,9 +70,9 @@ protected:
 
 
 	// Input data streams
-	Base::DataStreamIn<cv::Mat> in_img;
-	Base::DataStreamIn<Types::DrawableContainer> in_csystem;
-	Base::DataStreamIn<std::vector<cv::Point2f> > in_impoints;
+	Base::DataStreamIn<cv::Mat, Base::DataStreamBuffer::Newest, Base::Synchronization::Mutex> in_img;
+	Base::DataStreamIn<Types::DrawableContainer, Base::DataStreamBuffer::Newest, Base::Synchronization::Mutex> in_csystem;
+	Base::DataStreamIn<std::vector<cv::Point2f> , Base::DataStreamBuffer::Newest, Base::Synchronization::Mutex> in_impoints;
 
 	// Output data streams
 	Base::DataStreamOut<cv::Mat> out_img;

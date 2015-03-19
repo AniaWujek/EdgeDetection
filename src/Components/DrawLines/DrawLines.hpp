@@ -69,8 +69,8 @@ protected:
 
 
 	// Input data streams
-	Base::DataStreamIn<Types::DrawableContainer> in_lines;
-	Base::DataStreamIn<cv::Mat> in_img;
+	Base::DataStreamIn<Types::DrawableContainer, Base::DataStreamBuffer::Newest, Base::Synchronization::Mutex> in_lines;
+	Base::DataStreamIn<cv::Mat, Base::DataStreamBuffer::Newest, Base::Synchronization::Mutex> in_img;
 
 	// Output data streams
 	Base::DataStreamOut<cv::Mat> out_img;

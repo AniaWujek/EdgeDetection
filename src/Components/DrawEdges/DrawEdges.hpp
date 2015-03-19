@@ -1,6 +1,6 @@
 /*!
  * \file
- * \brief 
+ * \brief
  * \author Anna Wujek
  */
 
@@ -23,7 +23,7 @@ namespace DrawEdges {
  * \class DrawEdges
  * \brief DrawEdges processor class.
  *
- * 
+ *
  */
 class DrawEdges: public Base::Component {
 public:
@@ -39,7 +39,7 @@ public:
 
 	/*!
 	 * Prepare components interface (register streams and handlers).
-	 * At this point, all properties are already initialized and loaded to 
+	 * At this point, all properties are already initialized and loaded to
 	 * values set in config file.
 	 */
 	void prepareInterface();
@@ -68,8 +68,8 @@ protected:
 
 
 	// Input data streams
-	Base::DataStreamIn<cv::Mat> in_img;
-	Base::DataStreamIn<Types::Edges> in_edges;
+	Base::DataStreamIn<cv::Mat, Base::DataStreamBuffer::Newest, Base::Synchronization::Mutex> in_img;
+	Base::DataStreamIn<Types::Edges, Base::DataStreamBuffer::Newest, Base::Synchronization::Mutex> in_edges;
 
 	// Output data streams
 	Base::DataStreamOut<cv::Mat> out_img;
@@ -79,7 +79,7 @@ protected:
 
 	// Properties
 
-	
+
 	// Handlers
 	void DrawContours();
 
