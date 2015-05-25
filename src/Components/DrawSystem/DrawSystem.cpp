@@ -11,6 +11,7 @@
 #include "Common/Logger.hpp"
 
 #include <boost/bind.hpp>
+#include <boost/foreach.hpp>
 
 namespace Processors {
 namespace DrawSystem {
@@ -60,7 +61,13 @@ void DrawSystem::drawSys() {
     cv::Mat image = in_img.read().clone();
     std::vector<cv::Point2f> impoints = in_impoints.read();
     Types::DrawableContainer csystem = in_csystem.read();
-    csystem.draw(image, cv::Scalar(0,255,0));
+    //csystem.draw(image, cv::Scalar(0,255,0));
+
+    for(int i = 0; i < csystem.size(); ++i) {
+        Types::Drawable * line = csystem.get(i);
+        line->draw(image, cv::Scalar(0,255,0));
+    }
+
 
     for(int i = 0; i < impoints.size(); ++i) {
         circle(image, impoints[i], 3, cv::Scalar(0, 255, 0), -1, 8, 0);

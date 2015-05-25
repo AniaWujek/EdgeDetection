@@ -44,7 +44,7 @@ public:
 
 	virtual void draw(cv::Mat& image, cv::Scalar color, int offsetX = 0, int offsetY = 0)
 	{
-		cv::line(image, p1, p2, getCol(),1);
+		cv::line(image, p1, p2, getCol(),20);
 	}
 
 	double getDistanceFromPoint(cv::Point p)
