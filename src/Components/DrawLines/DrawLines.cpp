@@ -57,10 +57,20 @@ void DrawLines::DrawHoughLines() {
     cv::Mat image = in_img.read().clone();
     Types::DrawableContainer lines = in_lines.read();
 
-
-
     cv::Mat image_out = cv::Mat::zeros(image.size(), CV_8UC3);
-    lines.draw(image_out, cv::Scalar(255,0,255));
+    image_out.setTo(cv::Scalar(255,255,255));
+    for(int i = 0; i < lines.size(); ++i) {
+        Types::Line * line = dynamic_cast <Types::Line *> (lines.get(i));
+
+        cv::line(image_out, line->getP1(), line->getP2(), cv::Scalar(255,0,0), 15);
+
+    }
+
+
+
+
+
+    //lines.draw(image_out, cv::Scalar(255,0,255));
     //cv::cvtColor(image_out, image_out, CV_BGR2GRAY);
     out_img.write(image_out);
 }

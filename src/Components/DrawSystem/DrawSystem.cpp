@@ -64,13 +64,20 @@ void DrawSystem::drawSys() {
     //csystem.draw(image, cv::Scalar(0,255,0));
 
     for(int i = 0; i < csystem.size(); ++i) {
-        Types::Drawable * line = csystem.get(i);
-        line->draw(image, cv::Scalar(0,255,0));
+        Types::Line * line = dynamic_cast <Types::Line *> (csystem.get(i));
+        //line->draw(image, cv::Scalar(0,255,0));
+        cv::line(image, line->getP1(), line->getP2(), line->getCol(), 13);
+        if(i == 0)
+            cv::putText(image, "X", line->getP2(), cv::FONT_HERSHEY_SIMPLEX, 3.5, line->getCol(), 7, 8, false);
+        if(i == 1)
+            cv::putText(image, "Y", line->getP2(), cv::FONT_HERSHEY_SIMPLEX, 3.5, line->getCol(), 7, 8, false);
+        if(i == 2)
+            cv::putText(image, "Z", line->getP2(), cv::FONT_HERSHEY_SIMPLEX, 3.5, line->getCol(), 7, 8, false);
     }
 
 
     for(int i = 0; i < impoints.size(); ++i) {
-        circle(image, impoints[i], 3, cv::Scalar(0, 255, 0), -1, 8, 0);
+        circle(image, impoints[i], 15, cv::Scalar(0, 255, 0), -1, 8, 0);
     }
 
 

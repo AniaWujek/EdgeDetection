@@ -29,7 +29,7 @@ public:
 	{
         for (unsigned int i = 0; i < edges.size(); ++i)
 		{
-            cv::drawContours(image, edges, i, color, 1, 8, hierarchy, 0, cv::Point() );
+            cv::drawContours(image, edges, i, color, 2, 8, hierarchy, 0, cv::Point() );
 		}
 	}
 

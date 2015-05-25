@@ -15,6 +15,7 @@
 
 #include <opencv2/opencv.hpp>
 #include "Types/DrawableContainer.hpp"
+#include "Types/Line.hpp"
 
 
 namespace Processors {
